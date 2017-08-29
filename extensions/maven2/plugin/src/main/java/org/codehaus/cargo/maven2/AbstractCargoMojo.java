@@ -688,6 +688,8 @@ public abstract class AbstractCargoMojo extends AbstractCommonMojo
         if (context != null)
         {
             container = (org.codehaus.cargo.container.Container) context.get(containerKey);
+            ResourceUtils
+                .setResourceLoader((ClassLoader) context.get(containerKey + "-classloader"));
         }
 
         if (container == null)
@@ -740,6 +742,7 @@ public abstract class AbstractCargoMojo extends AbstractCommonMojo
         if (context != null)
         {
             context.put(containerKey, container);
+            context.put(containerKey + "-classloader", ResourceUtils.getResourceLoader());
         }
 
         return container;
